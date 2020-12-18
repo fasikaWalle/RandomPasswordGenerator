@@ -4,6 +4,6 @@
 ## Technologies used
 ### Javascript
 ## URL of the project
- ### Github Repo:https:https://fasikawalle.github.io/RandomPasswordGenerator/
-### Live site URL:https://github.com/fasikaWalle/RandomPasswordGenerator
+ ### Github Repo:https://github.com/fasikaWalle/RandomPasswordGenerator
+### Live site URL:https:https://fasikawalle.github.io/RandomPasswordGenerator/
 
