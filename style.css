@@ -118,12 +118,19 @@ button[disabled] {
   resize: none;
   overflow: hidden;
 }
-
+#clear {
+  margin-left: 1%;
+  padding: 15px 40px;
+}
 @media (max-width: 690px) {
-  .btn {
+  .btn,
+  #clear {
     font-size: 1rem;
     margin: 16px 0px 0px 0px;
     padding: 10px 15px;
+  }
+  #clear {
+    margin-left: 1%;
   }
 
   #password {
