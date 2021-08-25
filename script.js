@@ -1,131 +1,87 @@
 // Assignment code here
-var alphabets = [
-  "a",
-  "b",
-  "c",
-  "d",
-  "e",
-  "f",
-  "g",
-  "h",
-  "i",
-  "j",
-  "k",
-  "l",
-  "m",
-  "n",
-  "o",
-  "p",
-  "q",
-  "r",
-  "s",
-  "t",
-  "u",
-  "v",
-  "w",
-  "x",
-  "y",
-  "z",
-];
-var specialCharacters = ["!", "@", "$", "%", "&", "*", "~", "#", "^", "|"];
+// Assignment code here
+let chars = ["!", "#", "$", "%", "&", "|", "}", "~"];
+//let alpa = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z",];
+//let numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
+let newPassword = "";
+let pass = {
+  specialChar: "",
+  alpha: "",
+  uppercase: "",
+  num: "",
+};
+let passwordLen = 0;
 function generatePassword() {
-  var currentPassword = [];
-  var pwdLength = prompt("how many password do you want?");
-  if (pwdLength < 8) {
-    window.prompt("please choose between 8 and 126");
-  }
-  if (pwdLength > 128) {
-    window.prompt("please choose between 8 and 126");
-  }
-  var lowerCaseInclude = window.confirm("do you want lowercase?");
-  addLowerCaseToPassWord(lowerCaseInclude, currentPassword, pwdLength);
-
-  var UpperCaseInclude = window.confirm("do you want uppercase?");
-  addUpperCaseToPassWord(UpperCaseInclude, currentPassword, pwdLength);
-
-  var numberToInclude = window.confirm("do you want numbers?");
-  addNmberToPassword(numberToInclude, currentPassword, pwdLength);
-  var specialCharacterToInclude = window.confirm(
-    "do you want special character?"
+  newPassword = "";
+  passwordLen = prompt(
+    "please write length of your password between 8 and 128"
   );
-  addSpecialCharacterToPassWord(specialCharacterToInclude,currentPassword,pwdLength );
+  if (passwordLen >= 8 && passwordLen <= 128) {
+    pass.specialChar = confirm("do you need special character?");
+    if (pass.specialChar) {
+      addSpechalChar();
+    }
+    pass.alpha = confirm("do you need alphabets?");
+    if (pass.alpha) {
+      addAlphabet();
+    }
 
-  while (pwdLength > currentPassword.length) {
-    addLowerCaseToPassWord(lowerCaseInclude, currentPassword, pwdLength);
-    addUpperCaseToPassWord(UpperCaseInclude, currentPassword, pwdLength);
-    addNmberToPassword(numberToInclude, currentPassword, pwdLength);
-    addSpecialCharacterToPassWord(
-      specialCharacterToInclude,
-      currentPassword,
-      pwdLength
-    );
+    pass.uppercase = confirm("do you need capital Letter? yes or no");
+    if (pass.uppercase) {
+      addUppercase();
+    }
+    pass.num = confirm("do you need number? yes or no");
+    if (pass.num) {
+      addNumber();
+    }
+    //String.fromCharCode(Math.floor(Math.random()*26)+97)  //26 65 upper //10 48//number
+  } else {
+    alert("please choose between 8 and 128");
+    generatePassword();
   }
-  console.log(currentPassword);
-  return currentPassword.join("");
+  checkLength();
 }
-
-function addLowerCaseToPassWord(lowerCaseInclude, currentPassword, pwdLength) {
-  if (lowerCaseInclude == false || currentPassword.length >= pwdLength) {
-    return;
+function addSpechalChar() {
+  newPassword += chars[Math.floor(Math.random() * chars.length)];
+}
+function addAlphabet() {
+  if (newPassword.length < parseInt(passwordLen) && pass.alpha === true) {
+    // newPassword += alpa[Math.floor(Math.random() * chars.length)];
+    newPassword += String.fromCharCode(Math.floor(Math.random() * 26) + 97);
   }
-  var lowerCaseIndex = getRandomNumber(0,26);
-  var lowerCaseCharacter = alphabets[lowerCaseIndex];
-  // console.log(lowerCaseCharacter);
-  currentPassword.push(lowerCaseCharacter);
 }
-
-function addNmberToPassword(numberToInclude, currentPassword, pwdLength) {
-  if (numberToInclude == false || currentPassword.length >= pwdLength) {
-    return;
+function addUppercase() {
+  if (newPassword.length < parseInt(passwordLen) && pass.uppercase === true) {
+    // newPassword += alpa[Math.floor(Math.random() * alpa.length)].toUpperCase();
+    newPassword += String.fromCharCode(Math.floor(Math.random() * 26) + 65);
   }
-  var randomNumber = getRandomNumber(0,10);
-  currentPassword.push(randomNumber);
 }
-
-function addUpperCaseToPassWord(UpperCaseInclude, currentPassword, pwdLength) {
-  if (UpperCaseInclude == false || currentPassword.length >= pwdLength) {
-    return;
+function addNumber() {
+  if (newPassword.length < parseInt(passwordLen) && pass.num === true) {
+    //newPassword += numbers[Math.floor(Math.random() * numbers.length)];
+    newPassword += String.fromCharCode(Math.floor(Math.random() * 10) + 48);
   }
-  var upperCaseIndex = getRandomNumber(0,26);
-  var upperCaseCharacter = alphabets[upperCaseIndex].toUpperCase();
-  currentPassword.push(upperCaseCharacter);
 }
-
-function addSpecialCharacterToPassWord(
-  specialCharacterToInclude,
-  currentPassword,
-  pwdLength
-) {
-  console.log(pwdLength);
-  if (
-    specialCharacterToInclude == false ||
-    currentPassword.length >= pwdLength
-  ) {
-    return;
+function checkLength() {
+  while (parseInt(passwordLen) !== newPassword.length) {
+    addAlphabet();
+    addUppercase();
+    addNumber();
   }
-  var specialCharacterIndex = getRandomNumber(0,10);
-  var specialCharacter = specialCharacters[specialCharacterIndex];
-  currentPassword.push(specialCharacter);
-}
-function getRandomNumber(min, max) {
-  // console.log(Math.floor(Math.random() * num) + 1);
-return Math.floor(Math.random() * (max - min) + min);
+  return newPassword;
 }
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
-var passwordText = document.querySelector("#password");
 function writePassword() {
-  passwordText.value = "";
-  var password = generatePassword();
-  passwordText.value = password;
+  generatePassword();
+
+  var passwordText = document.querySelector("#password");
+
+  passwordText.value = newPassword;
 }
+
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-var clearBtn = document.getElementById("clear");
-clearBtn.addEventListener("click", clear);
-function clear() {
-  passwordText.value = "";
-}
