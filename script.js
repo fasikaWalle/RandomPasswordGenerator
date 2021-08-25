@@ -73,7 +73,6 @@ function checkLength() {
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
-<<<<<<< HEAD
 var passwordText = document.querySelector("#password");
 
 function writePassword() {
@@ -82,20 +81,9 @@ function writePassword() {
 }
 function clear() {
   passwordText.value = "";
-=======
-function writePassword() {
-  generatePassword();
-
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = newPassword;
->>>>>>> a29c7999edf0255171a5b698ea6e63774b15addb
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-<<<<<<< HEAD
 var clearBtn = document.getElementById("clear");
 clearBtn.addEventListener("click", clear);
-=======
->>>>>>> a29c7999edf0255171a5b698ea6e63774b15addb
